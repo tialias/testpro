@@ -1,6 +1,6 @@
 import pytest
 
-from testing.python import Calc
+from python.python import Calc
 
 
 class TestCalc:
@@ -8,21 +8,26 @@ class TestCalc:
     def setup(self):
         self.calc = Calc()
 
+    @pytest.mark.usefixtures("myfixture")
     def test_add(self):
+        # print("执行test_add")
         result = self.calc.add(1, 2)
         assert result == 3
 
-    def test_sub(self):
+    def test_sub(self, myfixture):
+        # print("执行test_add")
         result = self.calc.sub(2, 1)
         assert result == 1
 
-    def test_mult(self):
+    def test_mult(self, myfixture):
+        # print("执行test_mult")
         result = self.calc.mult(1, 2)
         assert result == 2
 
-    def test_div(self):
+    def test_div(self, myfixture):
+        # print("执行test_div")
         result = self.calc.div(2, 1)
         assert result == 2
 
 
-pytest.main(['-vs', 'test_pytest.py::TestCalc'])
+pytest.main(['-rvsq', 'test_pytest.py::TestCalc'])
